@@ -1,10 +1,28 @@
 import React from 'react';
-import './app.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styles from './app.module.css';
+import Login from './components/login/login';
+import Maker from './components/maker/maker';
 
-function App() {
-  return <h1> Hello :)</h1>;
-    
-     
+function App({authService}) {
+  return (
+    <div class={styles.app}>
+      <BrowserRouter>
+      {/* <Switch>
+        <Route exact path="/">
+          <Login authService={authService} />
+        </Route>
+        <Route path="/maker">
+          <Maker />
+        </Route>
+      </Switch> */}
+      <Routes>
+        <Route path="/" axact element={<Login authService={authService} />}/>
+        <Route path="/maker" axact element={<Maker authService={authService}/>}/>
+      </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App;
+export default App; 
