@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import Editor from '../editor/editor';
@@ -7,7 +7,45 @@ import Header from '../header/header';
 import Preview from '../preview/preview';
 import styles from './maker.module.css'
 
-const Maker = ({authService}) => {
+
+const Maker = ({FileInput , authService}) => {
+    const [cards, setCards] = useState({
+        '1': {
+            id: '1',
+            name: 'Oh',
+            company: 'Samsung',
+            theme:'dark',
+            title: 'Software Engineer',
+            email: 'ohkedu01@gmail.com',
+            message: 'go for it',
+            fileName: 'Oh',
+            fileURL: null
+        },
+        '2': {
+            id: '2',
+            name: 'Oh',
+            company: 'Samsung',
+            theme:'light',
+            title: 'Software Engineer',
+            email: 'ohkedu01@gmail.com',
+            message: 'go for it',
+            fileName: 'Oh',
+            fileURL: null
+        },
+        '3':{
+            id: '3',
+            name: 'Oh',
+            company: 'Samsung',
+            theme:'colorful',
+            title: 'Software Engineer',
+            email: 'ohkedu01@gmail.com',
+            message: 'go for it',
+            fileName: 'Oh',
+            fileURL: null
+        }
+
+    });
+    
     const navigate = useNavigate();
     const onLogout = () => {
         authService.logout();
@@ -20,12 +58,33 @@ const Maker = ({authService}) => {
             }
         })
     })
+
+    const createOrupdateCard = card => {
+        setCards(cards => {
+            const updated = {...cards};
+            updated[card.id] = card;
+            return updated;
+        });
+    };
+
+    const deleteCard = (card) => {
+        setCards(cards => {
+            const updated = {...cards};
+            delete updated[card.id];
+            return updated;
+        });
+    };
     return(
         <section className={styles.maker}>
             <Header onLogout={onLogout}/>
             <div className={styles.container}>
-                <Editor />
-                <Preview />
+                <Editor 
+                FileInput={FileInput}
+                cards={cards} 
+                addCard={createOrupdateCard} 
+                updateCard={createOrupdateCard} 
+                deleteCard={deleteCard}/>
+                <Preview cards={cards}/>
             </div>
             <Footer />
         </section>
