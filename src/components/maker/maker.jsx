@@ -8,52 +8,25 @@ import Preview from '../preview/preview';
 import styles from './maker.module.css'
 
 
-const Maker = ({FileInput , authService}) => {
-    const [cards, setCards] = useState({
-        '1': {
-            id: '1',
-            name: 'Oh',
-            company: 'Samsung',
-            theme:'dark',
-            title: 'Software Engineer',
-            email: 'ohkedu01@gmail.com',
-            message: 'go for it',
-            fileName: 'Oh',
-            fileURL: null
-        },
-        '2': {
-            id: '2',
-            name: 'Oh',
-            company: 'Samsung',
-            theme:'light',
-            title: 'Software Engineer',
-            email: 'ohkedu01@gmail.com',
-            message: 'go for it',
-            fileName: 'Oh',
-            fileURL: null
-        },
-        '3':{
-            id: '3',
-            name: 'Oh',
-            company: 'Samsung',
-            theme:'colorful',
-            title: 'Software Engineer',
-            email: 'ohkedu01@gmail.com',
-            message: 'go for it',
-            fileName: 'Oh',
-            fileURL: null
-        }
 
-    });
-    
+const Maker = ({FileInput , authService, cardRepository}) => {
     const navigate = useNavigate();
+    const navigateState = navigate.state;
+    const [cards, setCards] = useState({});
+    const [userId, setUserId] = useState(navigateState && navigateState.id);
+
+    
+    
     const onLogout = () => {
         authService.logout();
     };
 
     useEffect(() => {
         authService.onAuthChange(user => {
-            if(!user) {
+            if(user) {
+                setUserId(user.uid);
+            } 
+            else {
                 navigate('/');
             }
         })
@@ -65,6 +38,7 @@ const Maker = ({FileInput , authService}) => {
             updated[card.id] = card;
             return updated;
         });
+        cardRepository.saveCard(userId,card);
     };
 
     const deleteCard = (card) => {
@@ -73,6 +47,7 @@ const Maker = ({FileInput , authService}) => {
             delete updated[card.id];
             return updated;
         });
+        cardRepository.removeCard(userId,card);
     };
     return(
         <section className={styles.maker}>
