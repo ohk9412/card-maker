@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react/cjs/react.development';
 import Editor from '../editor/editor';
@@ -17,9 +17,10 @@ const Maker = ({FileInput , authService, cardRepository}) => {
 
     
     
-    const onLogout = () => {
+    const onLogout =useCallback(() => {
         authService.logout();
-    };
+    },[authService]);
+
 
     useEffect(()=> {
         if (!userId) {
