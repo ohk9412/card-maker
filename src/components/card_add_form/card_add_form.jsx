@@ -3,7 +3,7 @@ import Button from '../button/button';
 import styles from './card_add_form.module.css';
 
 // dd
-const Card_Add_Form = ({FileInput, onAdd}) => {
+const CardAddForm = ({FileInput, onAdd}) => {
     const formRef = useRef();
     const nameRef = useRef();
     const companyRef = useRef();
@@ -87,4 +87,4 @@ const Card_Add_Form = ({FileInput, onAdd}) => {
         )
     };
 
-export default Card_Add_Form;
+export default CardAddForm;

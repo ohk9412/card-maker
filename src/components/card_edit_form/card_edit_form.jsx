@@ -3,7 +3,7 @@ import Button from '../button/button';
 import styles from './card_edit_form.module.css'
 
 
-const Card_Edit_Form = ({FileInput, card,updateCard, deleteCard}) => {
+const CardEditForm = ({FileInput, card,updateCard, deleteCard}) => {
     const {
         name,
         company,
@@ -11,15 +11,15 @@ const Card_Edit_Form = ({FileInput, card,updateCard, deleteCard}) => {
         email,
         message, 
         theme, 
-        fileName, 
-        fileURL}
+        fileName
+    }
         = card;
 
         const onFileChange = file => {
             updateCard({
                 ...card,
                 fileName: file.name,
-                fileURL: file.url,
+                fileURL: file.url
             })
         }
 
@@ -95,4 +95,4 @@ const Card_Edit_Form = ({FileInput, card,updateCard, deleteCard}) => {
         )
     };
 
-export default Card_Edit_Form;
+export default CardEditForm;
