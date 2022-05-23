@@ -10,7 +10,7 @@ const Header = memo(({onLogout}) => (
         </button>)
         }
         <img className={styles.logo} 
-            src="/images/logo.png" 
+            src={process.env.PUBLIC_URL + "/images/logo.png"} 
             alt="logo" />
         <h1 className={styles.title}>
             Business Card Maker
