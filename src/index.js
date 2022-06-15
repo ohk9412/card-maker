@@ -17,7 +17,9 @@ const FileInput = memo(props => (
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <App authService={authService} FileInput={FileInput} cardRepository={cardRepository}/>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
